@@ -1,0 +1,20 @@
+baseURL: https://lumium.co/
+languageCode: en-us
+title: lumium
+theme: "PaperMod"
+
+mainsections: ["posts"]
+
+params:
+  ShowCodeCopyButtons: true
+  assets:
+    disableHLJS: true
+
+markup:
+  highlight:
+    # anchorLineNos: true
+    codeFences: true
+    guessSyntax: true
+    lineNos: true
+    # noClasses: false
+    style: monokai
