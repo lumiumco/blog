@@ -138,7 +138,7 @@ helm install ratelimit lumiumco/ratelimit -n istio-system
 ```
 
 This will deploy the service alongside Istio components.
-After a short while, you can verify that it’s running with:
+After a short while, you can verify that it’s running:
 ```bash
 kubectl get pods -n istio-system -l app=ratelimit
 ```
@@ -167,7 +167,7 @@ Each service has its own values.yaml file to define specific parameters such as 
 helm install light lumiumco/service -f https://raw.githubusercontent.com/lumiumco/light/refs/heads/main/values.yaml
 ```
 
-After a short while, you can verify that `light` service running with:
+After a short while, you can verify that `light` service running:
 ```bash
 kubectl get pods -l app.kubernetes.io/name=light
 ```
@@ -192,8 +192,7 @@ You should see the result:
 #### 6. Apply and Verify Rate Limiting Configuration
 With the `light` service running, we can now apply rate limiting configuration to control how many requests clients can make within a specific time window.
 
-The rate limiting configuration is defined as a `ConfigMap`.
-Each configuration specifies a **domain**, **descriptors** (which identify what is being limited), and the **limit** itself (requests per unit of time).
+The rate limiting configuration is defined as a `ConfigMap`. Each configuration specifies a **domain**, **descriptors** (which identify what is being limited), and the **limit** itself (requests per unit of time).
 
 We prepared the simplest rate limit configuration:
 ```yaml
@@ -218,6 +217,11 @@ This configuration limits access to all `/light*` endpoints to **3 requests per 
 Apply this configuration:
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/lumiumco/ratelimit-configs/refs/heads/main/simple/config-map.yaml
+```
+
+Restart `ratelimit` deployment:
+```bash
+kubectl rollout restart deployment ratelimit -n istio-system
 ```
 
 To verify that the configuration is active, send multiple requests in quick succession:
