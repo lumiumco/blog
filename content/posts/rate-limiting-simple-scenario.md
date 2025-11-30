@@ -1,7 +1,7 @@
 ---
 date: '2025-09-22T00:00:00+00:00'
 draft: false
-title: 'Rate Limiting in Practice: A Simple Scenario'
+title: 'Rate Limiting in Practice: Simple Scenario'
 ---
 ## Why Rate Limiting Matters
 
@@ -283,7 +283,7 @@ When a client sends a request:
  - the **Rate Limit Service** checks Redis and the **ConfigMap** definitions to determine if the request is within the limit.
  - based on the result, the gateway either forwards the request to the **service** or responds with a 429.
 
-#### 7. Conclusion
+#### 8. Conclusion
 
 With this setup, we have built a rate limit on top of Kubernetes and Istio.
 It demonstrates how a few declarative configurations can work together to enforce traffic control at the edge of your cluster.
